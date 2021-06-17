@@ -1,3 +1,4 @@
+// change 2
 // On my honor:
 // - I have not used source code obtained from another student,
 // or any other unauthorized source, either modified or
@@ -30,7 +31,7 @@ public class DTree {
     /**
      * root node for the base of DTree structure.
      */
-    public DTreeInternalNode<Integer> root;
+    public DTreeNode root;
     /**
      * number of nodes in the DTree.
      */
@@ -42,8 +43,9 @@ public class DTree {
      */
     // ~ Constructors ..........................................................
     public DTree() {
+        System.out.println("DTree constr");
         size = 1;
-        root = new DTreeInternalNode<Integer>(1);
+        root = new DTreeFlyWeightNode(0, "new tree");
     }
 
 
@@ -58,9 +60,52 @@ public class DTree {
      */
     // ~Public Methods ........................................................
     public void insertSequence(String sequence) {
+        /**
+         * 1. base case: if valid location,
+         *      if flyweight node, insert as leaf
+         *      if internal node, split, insert as leaf, insert other 4 flyweight nodes
+         */
+        this.root = insertHelper(sequence, this.root);
         // code here
+        
+    }
+    
+    private DTreeNode insertHelper(String seq, DTreeNode node) {
+        if(node.getClass().equals(DTreeFlyWeightNode.class)) {
+            System.out.println("At fly, inserting leaf");
+            DTreeLeafNode newLeaf = new DTreeLeafNode(seq);
+            return newLeaf;
+        }
+        else if(node.getClass().equals(DTreeLeafNode.class)) {
+            // split at leaf
+            DTreeLeafNode node1 = (DTreeLeafNode) node;
+            System.out.println("At Leaf, splitting");
+            DTreeInternalNode intern = new DTreeInternalNode(1);
+
+            // find right node, re-insert old leaf
+            DTreeLeafNode oldInsert = intern.findFit(node1);
+            oldInsert = new DTreeLeafNode(node1.data);
+            System.out.println("old = " + oldInsert.data);
+            // find right node, insert new leaf
+            DTreeLeafNode newInsert = intern.helper(seq);
+            newInsert = new DTreeLeafNode(seq);
+            System.out.println("new = " + newInsert.data);
+            
+            return intern;
+        }
+        else if(node.getClass().equals(DTreeInternalNode.class)) {
+            System.out.println("Internal case");
+            DTreeInternalNode intern = (DTreeInternalNode) node;
+            DTreeLeafNode newInsert = intern.helper(seq);
+            newInsert = new DTreeLeafNode(seq);
+            System.out.println("new = " + newInsert.data);
+            return intern;
+        }
+        return null;
+        
     }
 
+    
 
     // ----------------------------------------------------------
     /**
@@ -81,9 +126,33 @@ public class DTree {
      * on if sequence is or is not in the tree.
      */
     public void print() {
-        // code here
+        printHelper(this.root, 0);
     }
 
+    private void printHelper(DTreeNode root, int sp) {
+        if(root.getClass().equals(DTreeFlyWeightNode.class)) {
+            for(int i = 1; i<=sp; i++) {
+                System.out.print(" ");
+            }
+            System.out.println("E"); 
+        }
+        else if(root.getClass().equals(DTreeLeafNode.class)) {
+            DTreeLeafNode leaf = (DTreeLeafNode) root;
+            for(int i = 1; i<=sp; i++) {
+                System.out.print(" ");
+            }
+            System.out.println(leaf.data); 
+        }
+        else if(root.getClass().equals(DTreeInternalNode.class)) {
+            DTreeInternalNode in = (DTreeInternalNode) root;
+            printHelper(in.A, sp+1);
+            printHelper(in.C, sp+1);
+            printHelper(in.G, sp+1);
+            printHelper(in.T, sp+1);
+            printHelper(in.$, sp+1);
+        }
+        
+    }
 
     // ----------------------------------------------------------
     /**
@@ -134,7 +203,7 @@ public class DTree {
         // need to check for fly weight node before create a new DTree leaf node
         // object
         // need code here for checking
-        DTreeLeafNode<String> newNode = new DTreeLeafNode<String>(sequence);
+        DTreeLeafNode newNode = new DTreeLeafNode(sequence);
         // need code here for insertion.
         return newNode.height;
     }
@@ -148,7 +217,7 @@ public class DTree {
      *            input sequence data.
      * @return removed DTreeLeafNode.
      */
-    public DTreeLeafNode<String> remove(String sequence) {
+    public DTreeLeafNode remove(String sequence) {
         return null; // need to change return type to the removed DTreeLeafNode.
 
     }
