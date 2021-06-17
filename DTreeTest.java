@@ -29,13 +29,27 @@ import student.TestCase;
  */
 public class DTreeTest extends TestCase {
     // ~ Fields ................................................................
-
+    private DTree tree;
     // ~ Constructors ..........................................................
     /**
      * starter function calls every time before a test method.
      */
     public void setUp() {
         // write code here
+        tree = new DTree();
+    }
+    
+    public void test1() {
+        tree.insertSequence("ACGT");
+        tree.insertSequence("AAAA");
+        tree.insertSequence("AA");
+        tree.insertSequence("AAACCCCGGTGAAAACGTA");
+    }
+    
+    public void testPrint() {
+        tree.insertSequence("ACGT");
+        tree.insertSequence("AAAA");
+        tree.print();
     }
     // ~Public Methods ........................................................
 
