@@ -40,8 +40,16 @@ public class DTreeTest extends TestCase {
     }
     
     public void test1() {
-        tree.insertSequence("ABC");
-        tree.insertSequence("DEF");
+        tree.insertSequence("ACGT");
+        tree.insertSequence("AAAA");
+        tree.insertSequence("AA");
+        tree.insertSequence("AAACCCCGGTGAAAACGTA");
+    }
+    
+    public void testPrint() {
+        tree.insertSequence("ACGT");
+        tree.insertSequence("AAAA");
+        tree.print();
     }
     // ~Public Methods ........................................................
 

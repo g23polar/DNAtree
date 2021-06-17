@@ -18,23 +18,23 @@ public class DTreeInternalNode extends DTreeNode {
     /**
      * DTreeInternal node for "A" DNA type
      */
-    public DTreeFlyWeightNode A;
+    public DTreeLeafNode A;
     /**
      * DTreeInternal node for "C" DNA type
      */
-    public DTreeFlyWeightNode C;
+    public DTreeLeafNode C;
     /**
      * DTreeInternal node for "G" DNA type
      */
-    public DTreeFlyWeightNode G;
+    public DTreeLeafNode G;
     /**
      * DTreeInternal node for "T" DNA type
      */
-    public DTreeFlyWeightNode T;
+    public DTreeLeafNode T;
     /**
      * DTreeInternal node for "$ DNA type
      */
-    public DTreeFlyWeightNode $;
+    public DTreeLeafNode $;
 
     // ----------------------------------------------------------
     // ~ Constructors ..........................................................
@@ -52,6 +52,47 @@ public class DTreeInternalNode extends DTreeNode {
         G = new DTreeFlyWeightNode(nodeHeight + 1, "empty G");
         T = new DTreeFlyWeightNode(nodeHeight + 1, "empty T");
         $ = new DTreeFlyWeightNode(nodeHeight + 1, "empty $");
+    }
+    
+    public DTreeLeafNode findFit(DTreeLeafNode x) {
+        switch(x.data.substring(x.height).charAt(0)) {
+            case 'A':
+                return A;
+//                break;
+            case 'C':
+                return C;
+//                break;
+            case 'G':
+                return G;
+//                break;
+            case 'T':
+                return T;
+//                break;
+            default:
+                return $;
+//                break;
+        }
+    }
+    
+    public DTreeLeafNode helper(String x) {
+//        System.out.println("Current depth = " + depth);
+        String sub = x.substring(this.height);
+        switch(sub.charAt(0)) {
+            case 'A':
+                return A;
+//                break;
+            case 'C':
+                return C;
+//                break;
+            case 'G':
+                return G;
+//                break;
+            case 'T':
+                return T;
+//                break;
+            default:
+                return $;
+        }
     }
 
 

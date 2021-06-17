@@ -45,7 +45,7 @@ public class DTreeLeafNode extends DTreeNode {
      */
     // ~ Constructors ..........................................................
     public DTreeLeafNode(String nodeData) {
-        System.out.println("New Leaf - " + nodeData);
+//        System.out.println("New Leaf - " + nodeData);
         height = 1;
         data = nodeData;
     }
