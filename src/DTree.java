@@ -1,3 +1,4 @@
+// change 1
 // On my honor:
 // - I have not used source code obtained from another student,
 // or any other unauthorized source, either modified or
@@ -30,7 +31,7 @@ public class DTree {
     /**
      * root node for the base of DTree structure.
      */
-    public DTreeInternalNode<Integer> root;
+    public DTreeNode root;
     /**
      * number of nodes in the DTree.
      */
@@ -42,8 +43,9 @@ public class DTree {
      */
     // ~ Constructors ..........................................................
     public DTree() {
+        System.out.println("DTree constr");
         size = 1;
-        root = new DTreeInternalNode<Integer>(1);
+        root = new DTreeFlyWeightNode(0, "new tree");
     }
 
 
@@ -58,7 +60,30 @@ public class DTree {
      */
     // ~Public Methods ........................................................
     public void insertSequence(String sequence) {
+        /**
+         * 1. base case: if valid location,
+         *      if flyweight node, insert as leaf
+         *      if internal node, split, insert as leaf, insert other 4 flyweight nodes
+         * 
+         */
+        this.root = insertHelper(sequence, this.root);
         // code here
+        
+    }
+    
+    private DTreeNode insertHelper(String seq, DTreeNode node) {
+        if(node.getClass().equals(DTreeFlyWeightNode.class)) {
+            System.out.println("At fly, inserting leaf");
+            DTreeLeafNode newLeaf = new DTreeLeafNode(seq);
+            return newLeaf;
+        }
+        else if(node.getClass().equals(DTreeLeafNode.class)) {
+            // split at leaf
+            System.out.println("At Leaf, splitting");
+            DTreeInternalNode intern = new DTreeInternalNode(1);
+        }
+        return null;
+        
     }
 
 
@@ -134,7 +159,7 @@ public class DTree {
         // need to check for fly weight node before create a new DTree leaf node
         // object
         // need code here for checking
-        DTreeLeafNode<String> newNode = new DTreeLeafNode<String>(sequence);
+        DTreeLeafNode newNode = new DTreeLeafNode(sequence);
         // need code here for insertion.
         return newNode.height;
     }
@@ -148,7 +173,7 @@ public class DTree {
      *            input sequence data.
      * @return removed DTreeLeafNode.
      */
-    public DTreeLeafNode<String> remove(String sequence) {
+    public DTreeLeafNode remove(String sequence) {
         return null; // need to change return type to the removed DTreeLeafNode.
 
     }

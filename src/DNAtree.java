@@ -44,6 +44,7 @@ public class DNAtree {
         if (args.length != 1) {
             throw new IllegalArgumentException("Need input to be a file name.");
         }
+        
         String file = args[0];
         FileProcessor fp = new FileProcessor(file);
         fp.run();

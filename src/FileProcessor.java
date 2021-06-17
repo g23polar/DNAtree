@@ -50,6 +50,7 @@ public class FileProcessor {
      *             throw if file was not found
      */
     public FileProcessor(String fileName) throws FileNotFoundException {
+        System.out.println("in fp constr");
         File file = new File(fileName);
         scan = new Scanner(file);
         tree = new DTree();
@@ -61,10 +62,13 @@ public class FileProcessor {
      * run the program
      */
     public void run() {
+        System.out.println("in fp run");
         while (scan.hasNextLine()) { // scan the next line in the file
+            System.out.println("reading lines");
             String nextLine = scan.nextLine();
             if (nextLine.length() > 0) {
                 this.extractCommand(nextLine);
+                System.out.println(nextLine);
                 // extract the command and specify what type of command it is.
                 // DTree tree run methods based on command type.
             }
@@ -110,7 +114,7 @@ public class FileProcessor {
         // need to check for fly weight node before create a new DTree leaf node
         // object
         // need code here for checking
-        DTreeLeafNode<String> newNode = new DTreeLeafNode<String>(sequence);
+        DTreeLeafNode newNode = new DTreeLeafNode(sequence);
         // need code here for insertion.
         return newNode.height;
     }
@@ -124,7 +128,7 @@ public class FileProcessor {
      *            input sequence data.
      * @return removed DTreeLeafNode.
      */
-    public DTreeLeafNode<String> remove(String sequence) {
+    public DTreeLeafNode remove(String sequence) {
         return null; // need to change return type to the removed DTreeLeafNode.
 
     }

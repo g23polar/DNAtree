@@ -28,7 +28,7 @@
  * @param <E>
  *            generic data stored in the node
  */
-public class DTreeFlyWeightNode<E> extends DTreeLeafNode<E> {
+public class DTreeFlyWeightNode extends DTreeLeafNode {
     // ~ Fields ................................................................
     // ~ Constructors ..........................................................
     /**
@@ -42,6 +42,7 @@ public class DTreeFlyWeightNode<E> extends DTreeLeafNode<E> {
         super(nodeData);
         // TODO Auto-generated constructor stub
     }
+    
     // ~Public Methods ........................................................
 
 }

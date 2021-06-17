@@ -16,6 +16,8 @@
 // anything during the discussion or modifies any computer file
 // during the discussion. I have violated neither the spirit nor
 // letter of this restriction.
+import java.io.FileNotFoundException;
+
 import student.TestCase;
 
 // -------------------------------------------------------------------------
@@ -33,8 +35,21 @@ public class DNAtreeTest extends TestCase {
     /**
      * starter function calls every time before a test method.
      */
-    public void setUp() {
-        // write code here
+//    public void setUp() {
+//        // write code here
+//        
+//    }
+    
+    public void test1() {
+        String args[] = new String[1];
+        args[0] = "SampleInput.txt"; 
+        try {
+            DNAtree.main(args);
+        }
+        catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     // ~Public Methods ........................................................
 

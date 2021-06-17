@@ -22,10 +22,10 @@
  *
  * @author peiwenz
  * @version Jun 10, 2021
- * @param <E>
+ * @param 
  *            generic data stored in the node
  */
-public class DTreeLeafNode<E> implements DTreeNode<E> {
+public class DTreeLeafNode extends DTreeNode {
     // ~ Fields ................................................................
     /**
      * height of the node in the tree structure.
@@ -45,7 +45,8 @@ public class DTreeLeafNode<E> implements DTreeNode<E> {
      */
     // ~ Constructors ..........................................................
     public DTreeLeafNode(String nodeData) {
-        height = 0;
+        System.out.println("New Leaf - " + nodeData);
+        height = 1;
         data = nodeData;
     }
     // ~Public Methods ........................................................
@@ -54,7 +55,6 @@ public class DTreeLeafNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void clear() {
         // TODO Auto-generated method stub
 
@@ -65,9 +65,9 @@ public class DTreeLeafNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
+        
         return false;
     }
 
@@ -76,10 +76,9 @@ public class DTreeLeafNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public int getHeight() {
         // TODO Auto-generated method stub
-        return 0;
+        return this.height;
     }
 
 }
