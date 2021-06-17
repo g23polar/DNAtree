@@ -9,7 +9,7 @@
  * @param <E>
  *            generic data stored in the node
  */
-public class DTreeInternalNode<E> implements DTreeNode<E> {
+public class DTreeInternalNode extends DTreeNode {
     // ~ Fields ................................................................
     /**
      * height of the node in the tree structure.
@@ -18,23 +18,23 @@ public class DTreeInternalNode<E> implements DTreeNode<E> {
     /**
      * DTreeInternal node for "A" DNA type
      */
-    public DTreeInternalNode<E> A;
+    public DTreeLeafNode A;
     /**
      * DTreeInternal node for "C" DNA type
      */
-    public DTreeInternalNode<E> C;
+    public DTreeLeafNode C;
     /**
      * DTreeInternal node for "G" DNA type
      */
-    public DTreeInternalNode<E> G;
+    public DTreeLeafNode G;
     /**
      * DTreeInternal node for "T" DNA type
      */
-    public DTreeInternalNode<E> T;
+    public DTreeLeafNode T;
     /**
      * DTreeInternal node for "$ DNA type
      */
-    public DTreeInternalNode<E> $;
+    public DTreeLeafNode $;
 
     // ----------------------------------------------------------
     // ~ Constructors ..........................................................
@@ -45,12 +45,54 @@ public class DTreeInternalNode<E> implements DTreeNode<E> {
      *            height of the node
      */
     public DTreeInternalNode(int nodeHeight) {
+        System.out.println("Internal constr");
         height = nodeHeight;
-        A = new DTreeInternalNode<E>(nodeHeight + 1);
-        C = new DTreeInternalNode<E>(nodeHeight + 1);
-        G = new DTreeInternalNode<E>(nodeHeight + 1);
-        T = new DTreeInternalNode<E>(nodeHeight + 1);
-        $ = new DTreeInternalNode<E>(nodeHeight + 1);
+        A = new DTreeFlyWeightNode(nodeHeight + 1, "empty A");
+        C = new DTreeFlyWeightNode(nodeHeight + 1, "empty C");
+        G = new DTreeFlyWeightNode(nodeHeight + 1, "empty G");
+        T = new DTreeFlyWeightNode(nodeHeight + 1, "empty T");
+        $ = new DTreeFlyWeightNode(nodeHeight + 1, "empty $");
+    }
+    
+    public DTreeLeafNode findFit(DTreeLeafNode x) {
+        switch(x.data.substring(x.height).charAt(0)) {
+            case 'A':
+                return A;
+//                break;
+            case 'C':
+                return C;
+//                break;
+            case 'G':
+                return G;
+//                break;
+            case 'T':
+                return T;
+//                break;
+            default:
+                return $;
+//                break;
+        }
+    }
+    
+    public DTreeLeafNode helper(String x) {
+//        System.out.println("Current depth = " + depth);
+        String sub = x.substring(this.height);
+        switch(sub.charAt(0)) {
+            case 'A':
+                return A;
+//                break;
+            case 'C':
+                return C;
+//                break;
+            case 'G':
+                return G;
+//                break;
+            case 'T':
+                return T;
+//                break;
+            default:
+                return $;
+        }
     }
 
 
@@ -59,7 +101,6 @@ public class DTreeInternalNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void clear() {
         // TODO Auto-generated method stub
 
@@ -70,7 +111,6 @@ public class DTreeInternalNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
         return false;
@@ -81,7 +121,6 @@ public class DTreeInternalNode<E> implements DTreeNode<E> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public int getHeight() {
         // TODO Auto-generated method stub
         return 0;
